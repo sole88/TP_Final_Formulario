@@ -1,0 +1,120 @@
+<DOCTYPE html>
+  <html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale = 1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+      integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="js/puestos_trabajo.js" defer></script>
+  </head>
+
+  <body class="container">
+    <div class="div_postulaciones">
+      <div class="titulo">
+        <h1>Formulario solicitud de empleo</h1>
+      </div>
+      <!-- div para errores muestra errores de usuario al completar y div respuestas mostrar id generado y cantidad de postulantes en una vacante -->
+      <div id="respuesta"></div>
+      <div id="error"></div>
+
+      <p class="p_info" id="parrafo">Datos de caracter obligatorio *</p>
+
+      <form name="verificar_id" id="verificar_id">
+
+        <label>Ingrese su ID o Numero de Documento</label><span class="requerido" aria-label="Pregunta obligatoria">
+          *</span></br>
+        <input type="number" name="busqueda" id="busqueda" maxlength="30" autocomplete="off"/></br></br>
+        <button type="button" class="btn btn-info" id="buscar">Buscar</button> 
+        
+      </form>
+
+
+      <form name="form_postulaciones" id="form_postulaciones"  enctype="multipart/form-data" method="POST" action="http://localhost/TP_FINAL_PROMOCION_APIS/php/enviar_form.php">
+
+        <div id="datos" class="oculto">
+         
+          <!-- El max-length es igual al permitido en base datos -->
+          <label for="nombre">Nombre Completo</label><span class="requerido" aria-label="Pregunta obligatoria">
+            *</span></br>
+          <input type="text" maxlength="60" name="nombre" id="nombre" pattern="[A-Za-z ]" required></br>
+          <span id="nombre_error" class="error"></span>
+
+          <label for="apellido">Apellido</label><span class="requerido" aria-label="Pregunta obligatoria"> *</span><br>
+          <input type="text" maxlength="60" name="apellido" id="apellido" pattern="[A-Za-z ]" required></br>
+          <span id="apellido_error" class="error"></span>
+
+          <label for="tipo_doc">Tipo de documento</label><span class="requerido" aria-label="Pregunta obligatoria">
+            *</span></br>
+          <div class="select">
+
+            <select name="tipo_doc" id="tipo_doc">
+              <option value="0">Eliga su tipo de documento</option>
+
+            </select>
+
+          </div>
+
+          <label for="nro_doc">Numero de documento</label><span class="requerido" aria-label="Pregunta obligatoria">
+            *</span></br>
+          <input type="number" name="nro_doc" id="nro_doc" maxlength="20" required></br>
+          <span id="nro_doc_error" class="error"></span>
+
+          <label for="email">Email</label><span class="requerido" aria-label="Pregunta obligatoria"> *</span></br>
+          <input type="email" maxlength="60" id="email" name="email" required></br>
+          <span id="email_error" class="error"></span>
+
+          <label for="fecha_nac">Fecha de nacimiento</label><span class="requerido" aria-label="Pregunta obligatoria">
+            *</span></br>
+          <input type="date" name="fecha_nac" id="fecha_nac" required>
+          <span id="fecha_nac_error" class="error"></span>
+
+        </div>
+
+        <div id="div_foto" class="oculto">
+         <!--div para mostrar en caso de estar editando la foto perfil tamaño reducido-->
+          <div id="foto_miniatura"></div>
+          <label for="foto">Foto de perfil</label><span class="requerido" aria-label="Pregunta obligatoria">
+            *</span></br>
+          <input type="file" id="foto_perfil" name="foto_perfil" class="input-file" accept="image/png, image/jpeg"></br>
+          <p class="requerido">Solo se aceptan imagenes formato PNG o JPG, peso maximo :300KB y con nombre formato/tipo
+            :
+            foto_apellido_nombre.jpg o png</p>
+
+        </div>
+          
+
+        <div id="div_vacantes" class="oculto">
+
+          <label for="vacantes">Puesto de trabajo</label><span class="requerido" aria-label="Pregunta obligatoria">
+            *</span></br>
+          <div class="select">
+            <select name="vacantes" id="vacantes" required>
+              <option value="0">Seleccione una vacante</option>
+            </select>
+          </div></br>
+          <textarea id="motivos" name="motivos" rows="10" cols="50" maxlength="400"
+          placeholder="Explique aquí los motivos por los que la empresa debería contratarlo para dicho puesto"
+            pattern="[A-Za-z ]" required></textarea>
+        </div>
+
+        <div id="div_cv" class="oculto">
+          <!--div donde muestro el enlace si esta editando-->
+          <div id="cv_enlace"></div>
+          <label for="">Curriculum Vitae</label><span class="requerido" aria-label="Pregunta obligatoria"> *</span></br>
+          <input type="file" name="cv" id="cv" accept="application/pdf">
+          <p class="descripcion">Solo se aceptan formato PDF con formato nombre : cv_apellido_nombre.pdf</p>
+
+        </div>
+        </br>
+        <button type="button" id="btnSiguiente" class="oculto btn btn-info">Siguiente</button>
+        <input type="button" name="btnEnviar" id="btnEnviar" value="enviar datos" class="btn btn-info oculto" />
+        <input type="hidden" name="id_postulante" id="id_postulante" value="" />
+    </div>
+
+    </form>
+  </body>
+
+  </html>
